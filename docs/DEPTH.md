@@ -27,6 +27,11 @@
 | TRAP-19 | 采购版冲突 | 静默采信错误值 | 显式版本优先级 | `app/modules/m5_excess/rules.py` | `tests/test_excess.py::test_excess_capacity_version` |
 | TRAP-23 | 同刻交接 | 静默采信错误值 | 先结束后开始 | `app/modules/m4_concurrency/rules.py` | `tests/test_concurrency.py::test_sweep_boundary` |
 | TRAP-26 | 陈旧补传 | 静默采信错误值 | 递增版本 | `app/modules/m7_audit/rules.py` | `tests/test_audit.py::test_audit_stale` |
+| TRAP-30 | 重试连点 | 逐笔计成多份采购需求 | 同租约号重试合并为一张等待票 | `app/modules/m6_purchase/rules.py` | `tests/test_purchase.py::test_retry_same_ticket_merged_once` |
+| TRAP-31 | 并行作业 | 全并成一次漏掉并行需求 | 不同租约号各自成票、峰值并发 | `app/modules/m6_purchase/rules.py` | `tests/test_purchase.py::test_parallel_jobs_count_separately` |
+| TRAP-32 | 晚到获准 | 等待时长算到观察窗末 | grant/abandon缩短等待区间 | `app/modules/m6_purchase/rules.py` | `tests/test_purchase.py::test_late_grant_shortens_waiting` |
+| TRAP-33 | 满席误判 | 非满席拒绝也计入缺口 | 首次拒绝时刻占用对上限裁决 | `app/modules/m6_purchase/rules.py` | `tests/test_purchase.py::test_rejection_with_free_seat_is_not_shortage` |
+| TRAP-34 | 更新中断 | 半批数据覆盖旧测算 | 内容寻址批次，失败不落库 | `app/store.py` | `tests/test_purchase.py::test_interrupted_update_keeps_previous_run_intact` |
 
 ## 对账规则
 
